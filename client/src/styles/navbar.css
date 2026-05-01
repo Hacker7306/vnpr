@@ -1,0 +1,185 @@
+/* ── Sidebar Navigation ──────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 240px;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform var(--t-normal);
+}
+
+/* Logo Area */
+.navbar-logo {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.navbar-logo-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--blue) 0%, #2563EB 100%);
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: var(--blue-glow);
+  flex-shrink: 0;
+}
+.navbar-logo-text {
+  line-height: 1.2;
+}
+.navbar-logo-text h1 {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.navbar-logo-text h1 span { color: var(--blue); }
+.navbar-logo-sub {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex; align-items: center; gap: 5px;
+  margin-top: 2px;
+}
+.status-dot {
+  width: 6px; height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Nav Items */
+.navbar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all var(--t-fast);
+  position: relative;
+  overflow: hidden;
+}
+.nav-item:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+.nav-item.active {
+  background: var(--blue-dim);
+  color: var(--blue);
+  border-color: rgba(79,142,247,0.2);
+  font-weight: 600;
+}
+.nav-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 3px;
+  background: var(--blue);
+  border-radius: 0 2px 2px 0;
+}
+.nav-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-label { flex: 1; }
+.nav-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--blue);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+
+/* Nav Section Divider */
+.nav-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 4px;
+}
+.nav-section-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 4px 12px;
+  margin-top: 4px;
+}
+
+/* Footer */
+.navbar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+}
+.navbar-footer-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px;
+}
+.navbar-footer-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.ml-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.ml-status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  transition: background var(--t-normal);
+}
+.ml-status-dot.online  { background: var(--success); box-shadow: 0 0 6px var(--success); }
+.ml-status-dot.offline { background: var(--danger);  box-shadow: 0 0 6px var(--danger);  }
+
+/* Mobile Toggle */
+.navbar-toggle {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 200;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 10px;
+  border-radius: var(--r-md);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+@media (max-width: 900px) {
+  .navbar { transform: translateX(-100%); }
+  .navbar.open { transform: translateX(0); }
+  .navbar-toggle { display: flex; align-items: center; }
+}

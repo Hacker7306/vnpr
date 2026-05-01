@@ -1,0 +1,174 @@
+/* ── Google Fonts ─────────────────────────────────────────────────────────── */
+/* Inter & JetBrains Mono loaded via index.html */
+
+/* ── Design Tokens ───────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-base:     #080B14;
+  --bg-card:     #0D1117;
+  --bg-elevated: #161B27;
+  --bg-hover:    #1C2333;
+
+  /* Borders */
+  --border:       #1E2736;
+  --border-hover: #2D3F5C;
+  --border-focus: #4F8EF7;
+
+  /* Accent — Electric Blue */
+  --blue:       #4F8EF7;
+  --blue-dim:   rgba(79, 142, 247, 0.12);
+  --blue-glow:  0 0 24px rgba(79, 142, 247, 0.30);
+
+  /* Accent — Amber */
+  --amber:      #F59E0B;
+  --amber-dim:  rgba(245, 158, 11, 0.12);
+  --amber-glow: 0 0 24px rgba(245, 158, 11, 0.30);
+
+  /* Semantic */
+  --success:      #22C55E;
+  --success-dim:  rgba(34, 197, 94, 0.12);
+  --danger:       #EF4444;
+  --danger-dim:   rgba(239, 68, 68, 0.12);
+  --warning:      #F59E0B;
+
+  /* Text */
+  --text-primary:   #E6EDF3;
+  --text-secondary: #8B949E;
+  --text-muted:     #484F58;
+  --text-accent:    #4F8EF7;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  /* Radii */
+  --r-sm:  6px;
+  --r-md:  10px;
+  --r-lg:  14px;
+  --r-xl:  20px;
+  --r-2xl: 28px;
+
+  /* Shadows */
+  --shadow-sm:   0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg:   0 8px 32px rgba(0,0,0,0.5);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4);
+
+  /* Transitions */
+  --t-fast:   0.15s ease;
+  --t-normal: 0.25s ease;
+  --t-slow:   0.4s ease;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+input, select, textarea { font-family: inherit; }
+
+/* ── Layout Shell ────────────────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 240px;
+  padding: 32px;
+  background: var(--bg-base);
+}
+
+@media (max-width: 900px) {
+  .app-main { margin-left: 0; padding: 16px; padding-top: 72px; }
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+/* ── Animations ──────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scanBeam {
+  0%   { top: 0%; opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Utility ─────────────────────────────────────────────────────────────── */
+.animate-fade-up   { animation: fadeUp 0.4s ease both; }
+.animate-fade-in   { animation: fadeIn 0.3s ease both; }
+.animate-slide-in  { animation: slideInRight 0.35s ease both; }
+.text-mono         { font-family: var(--font-mono); }
+.text-muted        { color: var(--text-secondary); }
+.text-accent       { color: var(--blue); }
+.text-amber        { color: var(--amber); }
+.text-success      { color: var(--success); }
+.text-danger       { color: var(--danger); }
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+.page-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
