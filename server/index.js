@@ -72,8 +72,9 @@ app.post("/api/process", upload.single("image"), async (req, res) => {
         error: "OCR service is offline. Start the Python Flask service on port 8000.",
       });
     }
+    const status = err.response?.status || 500;
     const msg = err.response?.data?.error || err.message;
-    return res.status(500).json({ error: msg });
+    return res.status(status).json({ error: msg });
   }
 });
 
