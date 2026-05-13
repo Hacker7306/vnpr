@@ -22,8 +22,8 @@ def _to_bgr(image_bytes: bytes):
     if img is None:
         return None
         
-    # Resize image to a maximum width/height of 800px to prevent Out-Of-Memory errors on Render Free Tier
-    max_dim = 800
+    # Resize image to a maximum width/height of 1200px to prevent Out-Of-Memory errors on Render Free Tier
+    max_dim = 1200
     h, w = img.shape[:2]
     if max(h, w) > max_dim:
         scale = max_dim / max(h, w)
