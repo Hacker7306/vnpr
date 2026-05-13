@@ -106,7 +106,12 @@ export default function Scanner() {
       form.append("image", blob, "capture.jpg");
 
       const res = await api.post("/process", form, { headers: { "Content-Type": "multipart/form-data" } });
-      setResult(res.data);
+      
+      if (res.data.success === false) {
+        throw new Error(res.data.error);
+      }
+
+      setResult(res.data.scan || res.data);
       setSaved(true);
 
       // If camera capture — update preview with the captured frame
@@ -114,7 +119,7 @@ export default function Scanner() {
         setPreview(canvasRef.current.toDataURL("image/jpeg"));
       }
     } catch (err) {
-      setError(err.response?.data?.error ?? err.message);
+      setError(err.response?.data?.error || err.message);
     } finally {
       setProcessing(false);
     }

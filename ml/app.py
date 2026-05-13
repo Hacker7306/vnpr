@@ -30,10 +30,7 @@ def ocr():
     result = process_image(image_bytes)
 
     if result is None:
-        return (
-            jsonify({"error": "Could not detect a license plate in the image."}),
-            422,
-        )
+        return jsonify({"success": False, "error": "Could not detect a license plate in the image."}), 200
 
     return jsonify(result)
 

@@ -49,6 +49,10 @@ app.post("/api/process", upload.single("image"), async (req, res) => {
       timeout: 30000,
     });
 
+    if (mlRes.data.success === false) {
+      return res.status(200).json({ success: false, error: mlRes.data.error });
+    }
+
     const { plateNumber, confidence, vehicleType } = mlRes.data;
 
     // Convert uploaded buffer to base64 data-url for storage
@@ -63,18 +67,19 @@ app.post("/api/process", upload.single("image"), async (req, res) => {
       location: req.body.location || "",
     });
 
-    return res.status(201).json(scan);
+    return res.status(200).json({ success: true, scan });
   } catch (err) {
     // If ML service is down return a descriptive error
     const mlDown = err.code === "ECONNREFUSED" || err.code === "ECONNABORTED";
     if (mlDown) {
       return res.status(503).json({
+        success: false,
         error: "OCR service is offline. Start the Python Flask service on port 8000.",
       });
     }
     const status = err.response?.status || 500;
     const msg = err.response?.data?.error || err.message;
-    return res.status(status).json({ error: msg });
+    return res.status(status).json({ success: false, error: msg });
   }
 });
 
