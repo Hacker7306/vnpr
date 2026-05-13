@@ -15,9 +15,20 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def _to_bgr(image_bytes: bytes):
-    """Decode raw bytes to a BGR numpy array."""
+    """Decode raw bytes to a BGR numpy array and downscale to prevent OOM."""
     arr = np.frombuffer(image_bytes, np.uint8)
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+    
+    if img is None:
+        return None
+        
+    # Resize image to a maximum width/height of 800px to prevent Out-Of-Memory errors on Render Free Tier
+    max_dim = 800
+    h, w = img.shape[:2]
+    if max(h, w) > max_dim:
+        scale = max_dim / max(h, w)
+        img = cv2.resize(img, (int(w * scale), int(h * scale)), interpolation=cv2.INTER_AREA)
+        
     return img
 
 
