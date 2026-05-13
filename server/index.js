@@ -13,7 +13,10 @@ const PORT   = process.env.PORT   || 5000;
 const ML_URL = process.env.ML_URL || "http://localhost:8000";
 
 // ── Middleware ────────────────────────────────────────────────────────────────
-app.use(cors({ origin: ["http://localhost:5173", "http://127.0.0.1:5173"] }));
+const corsOptions = {
+  origin: process.env.CLIENT_URL ? [process.env.CLIENT_URL, "http://localhost:5173", "http://127.0.0.1:5173"] : "*",
+};
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
 // ── MongoDB ───────────────────────────────────────────────────────────────────
