@@ -79,7 +79,8 @@ app.post("/api/process", upload.single("image"), async (req, res) => {
     }
     const status = err.response?.status || 500;
     const msg = err.response?.data?.error || err.message;
-    return res.status(status).json({ success: false, error: msg });
+    // Always return 200 OK to the client to avoid console red errors, but include the real status in the payload.
+    return res.status(200).json({ success: false, error: msg, originalStatus: status });
   }
 });
 
